@@ -1,5 +1,5 @@
 # Array to Html
-Convert an array of objects to a simple markdown table.
+Convert an array of objects to a simple html table, list or DOMElement.
 
 # Install
 ```bash
