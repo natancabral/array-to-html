@@ -38,11 +38,11 @@ console.log(tableHtml);
 
 ## Options
 
-| Options | Description |
----------------------------------------------------
-| minify | Compress HTML, remove spaces and bleaks |
-| fake_style | inject style |
-| columnsSize  | percent array [25, 25, 0, 50] |
+| *Options*      | Description                     |
+|--------------------------------------------------|
+| *minify*       | Compress HTML, remove spaces and bleaks |
+| *fake_style*   | inject style |
+| *columnsSize*  | percent array [25, 25, 0, 50] |
 
 ## License
 
