@@ -38,15 +38,23 @@ console.log(tableHtml);
 
 ## Options
 
-| **Options**      | Type | Description                      |
-|------------------|------|----------------------------------|
-| **minify**       | boolean | Compress HTML, remove spaces and bleaks |
-| **fake_style**   | boolean | Insert styles |
-| **columns_size**  | numeric array | Percent array [25, 25, 0, 50] |
+| **Options**        | Type | Description                      |
+|--------------------|------|----------------------------------|
+| **minify**         | boolean | Compress HTML, remove spaces and bleaks |
+| **fake_style**     | boolean | Insert styles |
+| **columns_size**   | numeric array | Percent array [25, 25, 0, 50] |
+| **columns_names**  | string array | Header label |
+
+## ToDo
+
+- Table DOMElement
+- Array to List
+
 
 ## License
 
 The MIT License.
+
 
 ## Author
 

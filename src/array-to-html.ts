@@ -1,10 +1,8 @@
 
-
-
 const FAKE_STYLE = {
-  table:    'width: 100%; border: 1px solid #000;',
-  thead_td: 'background-color: #333; color: #fff; padding: 5px 10px;',
-  tbody_td: 'padding: 5px 10px;',
+  table:    'width: 100%; border: 1px solid #777; margin: 1px 1px 3px 1px;',
+  thead_td: 'background-color: #555; color: #fff; padding: 3px 7px;',
+  tbody_td: 'padding: 3px 7px;',
 }
 
 function createFakeStyle(apply: boolean, typeFakeStyle: ITypeFakeStyle, addStyle?: string): string {
@@ -20,34 +18,40 @@ function arrayToTable (array: any[], options: IOptions ) {
     return '';
   }
 
-  let { minify, fake_style, columns_size} = options || {};
+  let { minify, fake_style, columns_size, header } = options || {};
 
   // variables
   let lenTable = array.length;
-  let headerKeys = [];
+  let headerKeys: string[] = [];
   let table: string = '';
-  let header: string = '';
+  let headerHtml: string = '';
   let body: string = '';
   let bodyPiece: string = '';
   let itemOfArray: any;
   let widthTd: string = '';
   let hasColumSize:boolean = true;
+  let renderer: Function;
 
   // traitament
-  minify      || (minify = false);
-  fake_style  || (fake_style = false);
+  minify        || (minify = false);
+  fake_style    || (fake_style = false);
   columns_size  || (columns_size = []);
+  header        || (header = []);
+
+  // array
+  Array.isArray(columns_size) || (columns_size = []);
+  Array.isArray(header) || (header = []);
 
   // header
   for(const keys in array[0]) {
     headerKeys.push(keys);
-    header += `<td ${createFakeStyle(fake_style, 'thead_td')}>${keys}</td> `;
+    headerHtml += `<td ${createFakeStyle(fake_style, 'thead_td')}>${keys}</td> `;
   }
   
-  header = `
+  headerHtml = `
     <thead>
       <tr>
-        ${header}
+        ${headerHtml}
       </tr>
     </thead>`;
 
@@ -57,20 +61,35 @@ function arrayToTable (array: any[], options: IOptions ) {
     hasColumSize = false;
   }
 
+  // check length header = keys
+  // if (header.length !== headerKeys.length) {
+  //   header = [];
+  // }
+
   // for array
   for (let i = 0; i < lenTable; i++) {
 
     // get item by array
     itemOfArray = array[i];
     bodyPiece = '';
+    widthTd = '';
   
     for (let e = 0; e < headerKeys.length; e++) {
 
+      // renderer
+      const headerFind = header.find((el) => el.property === headerKeys[e]);
+      renderer = headerFind?.renderer || (renderer = (el: any) => el);
+      
+      // columns size 2
       if (hasColumSize) {
         widthTd = columns_size[e] < 1 ? '' : ` width: ${columns_size[e]}%`;
-      }  
+      }
+      // columns size 1
+      if (headerFind?.width) {
+        widthTd = headerFind?.width < 1 ? '' : ` width: ${headerFind?.width}%`;
+      }
 
-      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td', widthTd)}>${itemOfArray[headerKeys[e]]}</td> `;
+      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td', widthTd)}> ${ renderer(itemOfArray[headerKeys[e]]) } </td> `;
     }
     body += `
       <tr>
@@ -86,7 +105,7 @@ function arrayToTable (array: any[], options: IOptions ) {
 
   table = `
   <table ${createFakeStyle(fake_style, 'table')}> 
-    ${header} 
+    ${headerHtml} 
     ${body} 
   </table>`;
 
