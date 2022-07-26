@@ -5,8 +5,8 @@
   },
   "name": "array-to-html",
   "description": "Convert an array of objects to a simple markdown table.",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "lib/array-to-html.js",
   "directories": {
     "lib": "lib",
     "test": "test"
