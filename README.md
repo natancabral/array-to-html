@@ -6,7 +6,7 @@ Convert an array of objects to a simple html table, list or DOMElement.
 $ npm i array-to-table-html
 ```
 # Use 
-```bash
+```js
 const { arrayToTable } = require('array-to-html');
 
 const tableArray = [
