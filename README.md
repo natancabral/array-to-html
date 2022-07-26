@@ -8,7 +8,21 @@ $ npm i array-to-table-html
 # Use 
 ```bash
 const { arrayToTable } = require('array-to-html');
-const table = arrayToTable(array);
+
+const tableArray = [
+  {
+    Name: 'Jack',
+    Age: 40,
+  },
+  {
+    Name: 'Maria',
+    Age: 35,
+  },  
+];
+
+const tableHtml = arrayToTable(tableArray);
+console.log(tableHtml);
+
 ```
 # Output table
 
