@@ -1,4 +1,4 @@
-# Array to Table
+# Array to Table Html
 Convert an array of objects to a simple markdown table.
 
 # Instal
