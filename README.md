@@ -10,6 +10,8 @@ $ npm i array-to-html
 ```
 # Use 
 ## Array to Table
+### Sample 
+
 ```js
 const { arrayToTable } = require('array-to-html');
 
@@ -33,9 +35,11 @@ console.log(tableHtml);
 
 <table> <thead> <tr> <td>Name</td> <td>Age</td></tr> </thead> <tbody><tr> <td>Jack</td> <td>40</td></tr><tr> <td>Maria</td> <td>35</td></tr></tbody></table>
 
+
 ## Options
 
 | Options | Description |
+---------------------------------------------------
 | minify | Compress HTML, remove spaces and bleaks |
 | fake_style | inject style |
 | columnsSize  | percent array [25, 25, 0, 50] |
