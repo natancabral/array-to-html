@@ -1,9 +1,12 @@
 # Array to Html
 Convert an array of objects to a simple html table, list or DOMElement.
 
-# Install
+# Install [<img src="https://github.com/natancabral/pdfkit-table/blob/main/example/npm-tile.png">](https://www.npmjs.com/package/array-to-html)
+
+[![NPM](https://nodei.co/npm/array-to-html.png)](https://www.npmjs.com/package/array-to-html)
+
 ```bash
-$ npm i array-to-table-html
+$ npm i array-to-html
 ```
 # Use 
 ## Array to Table
