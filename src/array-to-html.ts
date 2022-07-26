@@ -1,8 +1,17 @@
 
 
-declare interface IOptions {
-  minify?: boolean;
-  fakeStyle?: boolean
+
+const FAKE_STYLE = {
+  table:    'width: 100%; border: 1px solid #000; ',
+  thead_td: 'background-color: #333; color: #fff; padding: 5px 10px; ',
+  tbody_td: 'padding: 5px 10px; ',
+}
+
+function createFakeStyle(apply: boolean, typeFakeStyle: ITypeFakeStyle): string {
+  if (typeFakeStyle)
+    return `style="${FAKE_STYLE[typeFakeStyle]}"`;
+  else
+    return '';
 }
 
 function arrayToTable (array: any[], options: IOptions ) {
@@ -11,7 +20,7 @@ function arrayToTable (array: any[], options: IOptions ) {
     return '';
   }
 
-  const { minify } = options || {};
+  let { minify, fake_style, columnsSize} = options || {};
 
   // variables
   let lenTable = array.length;
@@ -22,11 +31,16 @@ function arrayToTable (array: any[], options: IOptions ) {
   let bodyPiece: string = '';
   let itemOfArray: any;
 
+  // traitament
+  minify      || (minify = false);
+  fake_style  || (fake_style = false);
+  columnsSize  || (fake_style = false);
+
   // header
 
   for(const keys in array[0]) {
     headerKeys.push(keys);
-    header += `<td>${keys}</td> `;
+    header += `<td ${createFakeStyle(fake_style, 'thead_td')}>${keys}</td> `;
   }
   
   header = `
@@ -41,7 +55,7 @@ function arrayToTable (array: any[], options: IOptions ) {
     itemOfArray = array[i];
     bodyPiece = '';
     for (let e = 0; e < headerKeys.length; e++) {
-      bodyPiece += `<td>${itemOfArray[headerKeys[e]]}</td> `;
+      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td')}>${itemOfArray[headerKeys[e]]}</td> `;
     }
     body += `
       <tr>
@@ -56,7 +70,7 @@ function arrayToTable (array: any[], options: IOptions ) {
     </tbody>`;
 
   table = `
-  <table> 
+  <table ${createFakeStyle(fake_style, 'table')}> 
     ${header} 
     ${body} 
   </table>`;

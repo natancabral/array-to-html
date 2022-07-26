@@ -32,3 +32,29 @@ console.log(tableHtml);
 ### Output 
 
 <table> <thead> <tr> <td>Name</td> <td>Age</td></tr> </thead> <tbody><tr> <td>Jack</td> <td>40</td></tr><tr> <td>Maria</td> <td>35</td></tr></tbody></table>
+
+## Options
+
+| Options | Description |
+| minify | Compress HTML, remove spaces and bleaks |
+| fake_style | inject style |
+| columnsSize  | percent array [25, 25, 0, 50] |
+
+## License
+
+The MIT License.
+
+## Author
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/natancabral.png?s=100" width="100"/>
+    </td>
+    <td>
+      Natan Cabral<br />
+      <a href="mailto:natancabral@hotmail.com">natancabral@hotmail.com</a><br />
+      <a href="https://github.com/natancabral/">https://github.com/natancabral/</a>
+    </td>
+  </tr>
+</table>
