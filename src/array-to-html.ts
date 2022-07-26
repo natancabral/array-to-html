@@ -20,7 +20,7 @@ function arrayToTable (array: any[], options: IOptions ) {
     return '';
   }
 
-  let { minify, fake_style, columnsSize} = options || {};
+  let { minify, fake_style, columns_size} = options || {};
 
   // variables
   let lenTable = array.length;
@@ -34,7 +34,7 @@ function arrayToTable (array: any[], options: IOptions ) {
   // traitament
   minify      || (minify = false);
   fake_style  || (fake_style = false);
-  columnsSize  || (fake_style = false);
+  columns_size  || (columns_size = false);
 
   // header
 

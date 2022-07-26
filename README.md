@@ -42,7 +42,7 @@ console.log(tableHtml);
 |------------------|------|----------------------------------|
 | **minify**       | boolean | Compress HTML, remove spaces and bleaks |
 | **fake_style**   | boolean | Insert styles |
-| **columnsSize**  | numeric array | Percent array [25, 25, 0, 50] |
+| **columns_size**  | numeric array | Percent array [25, 25, 0, 50] |
 
 ## License
 
