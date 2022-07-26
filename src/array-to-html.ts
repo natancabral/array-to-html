@@ -2,14 +2,14 @@
 
 
 const FAKE_STYLE = {
-  table:    'width: 100%; border: 1px solid #000; ',
-  thead_td: 'background-color: #333; color: #fff; padding: 5px 10px; ',
-  tbody_td: 'padding: 5px 10px; ',
+  table:    'width: 100%; border: 1px solid #000;',
+  thead_td: 'background-color: #333; color: #fff; padding: 5px 10px;',
+  tbody_td: 'padding: 5px 10px;',
 }
 
-function createFakeStyle(apply: boolean, typeFakeStyle: ITypeFakeStyle): string {
+function createFakeStyle(apply: boolean, typeFakeStyle: ITypeFakeStyle, addStyle?: string): string {
   if (typeFakeStyle)
-    return `style="${FAKE_STYLE[typeFakeStyle]}"`;
+    return `style="${FAKE_STYLE[typeFakeStyle]} ${addStyle || ''}"`;
   else
     return '';
 }
@@ -30,14 +30,15 @@ function arrayToTable (array: any[], options: IOptions ) {
   let body: string = '';
   let bodyPiece: string = '';
   let itemOfArray: any;
+  let widthTd: string = '';
+  let hasColumSize:boolean = true;
 
   // traitament
   minify      || (minify = false);
   fake_style  || (fake_style = false);
-  columns_size  || (columns_size = false);
+  columns_size  || (columns_size = []);
 
   // header
-
   for(const keys in array[0]) {
     headerKeys.push(keys);
     header += `<td ${createFakeStyle(fake_style, 'thead_td')}>${keys}</td> `;
@@ -50,12 +51,26 @@ function arrayToTable (array: any[], options: IOptions ) {
       </tr>
     </thead>`;
 
+  // check length colums = keys
+  if (columns_size.length !== headerKeys.length) {
+    columns_size = [];
+    hasColumSize = false;
+  }
+
   // for array
   for (let i = 0; i < lenTable; i++) {
+
+    // get item by array
     itemOfArray = array[i];
     bodyPiece = '';
+  
     for (let e = 0; e < headerKeys.length; e++) {
-      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td')}>${itemOfArray[headerKeys[e]]}</td> `;
+
+      if (hasColumSize) {
+        widthTd = columns_size[e] < 1 ? '' : ` width: ${columns_size[e]}%`;
+      }  
+
+      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td', widthTd)}>${itemOfArray[headerKeys[e]]}</td> `;
     }
     body += `
       <tr>
