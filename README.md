@@ -10,12 +10,13 @@ $ npm i array-to-html
 ```
 # Use 
 ## Array to Table
-### Sample 1
+### Sample
 
 
 ```js
 const { arrayToTable } = require('array-to-html');
 
+// array collection
 const tableArray = [
   {
     Name: 'Jack',
@@ -27,7 +28,9 @@ const tableArray = [
   },  
 ];
 
+// the magic
 const tableHtml = arrayToTable(tableArray);
+// output
 console.log(tableHtml);
 
 ```
@@ -48,7 +51,10 @@ console.log(tableHtml);
 
 
 ```js
+// array collection
 const tableArray = [ ... ];
+
+// options
 const options = {
   minify: true, 
   fake_style: true,
@@ -61,6 +67,7 @@ const options = {
     }
   ]
 }
+// the magic
 const tableHtml = arrayToTable(tableArray, options);
 ```
 
