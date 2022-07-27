@@ -1,23 +1,21 @@
 {
-  "devDependencies": {
-    "@types/node": "^18.6.1",
-    "typescript": "^4.7.4"
-  },
   "name": "array-to-html",
   "description": "Convert an array of objects to a simple markdown table.",
   "version": "0.0.10",
   "main": "lib/array-to-html.js",
+  "author": "natancabral",
   "keywords": [
-    "array-to-table",
     "array to table",
-    "array-to-table-html",
     "array to table html",
-    "array-to-html",
     "json to table",
     "html to table",
     "object to table",
     "table html"
   ],
+  "devDependencies": {
+    "@types/node": "^18.6.1",
+    "typescript": "^4.7.4"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -31,8 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/natancabral/array-to-html.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/natancabral/array-to-html/issues"
   },

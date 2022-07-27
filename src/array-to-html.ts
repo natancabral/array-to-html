@@ -44,8 +44,13 @@ function arrayToTable (array: any[], options: IOptions ) {
 
   // header
   for(const keys in array[0]) {
+
+    // renderer
+    const headerFind = header.find((el) => el.property === keys);
+    const label = headerFind?.label || keys;
+
     headerKeys.push(keys);
-    headerHtml += `<td ${createFakeStyle(fake_style, 'thead_td')}>${keys}</td> `;
+    headerHtml += `<td ${createFakeStyle(fake_style, 'thead_td')}>${label}</td> `;
   }
   
   headerHtml = `

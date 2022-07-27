@@ -52,11 +52,11 @@ const tableArray = [ ... ];
 const options = {
   minify: true, 
   fake_style: true,
-  columns_size: [70, 30], // 70%. 30%
+  columns_size: [70, 30], // 70%. 30% (two columns)
   header: [
     {
       property: 'Name',
-      label: 'N A M E',
+      label: 'N-A-M-E',
       width: 70, // 70%
     }
   ]
