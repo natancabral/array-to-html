@@ -10,7 +10,8 @@ $ npm i array-to-html
 ```
 # Use 
 ## Array to Table
-### Sample 
+### Sample 1
+
 
 ```js
 const { arrayToTable } = require('array-to-html');
@@ -40,10 +41,29 @@ console.log(tableHtml);
 
 | **Options**        | Type | Description                      |
 |--------------------|------|----------------------------------|
-| **minify**         | boolean | Compress HTML, remove spaces and bleaks |
-| **fake_style**     | boolean | Insert styles |
-| **columns_size**   | numeric array | Percent array [25, 25, 0, 50] |
-| **columns_names**  | string array | Header label |
+| **minify**         | Boolean | Compress HTML, remove spaces and bleaks |
+| **fake_style**     | Boolean | Insert styles |
+| **columns_size**   | Numeric Array | Percent array [25, 25, 0, 50] |
+| **header**         | Array | Header property, label, width |
+
+
+```js
+const tableArray = [ ... ];
+const options = {
+  minify: true, 
+  fake_style: true,
+  columns_size: [70, 30], // 70%. 30%
+  header: [
+    {
+      property: 'Name',
+      label: 'N A M E',
+      width: 70, // 70%
+    }
+  ]
+}
+const tableHtml = arrayToTable(tableArray, options);
+```
+
 
 ## ToDo
 
