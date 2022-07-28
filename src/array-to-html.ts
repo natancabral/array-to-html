@@ -6,8 +6,10 @@ const FAKE_STYLE = {
 }
 
 function createFakeStyle(apply: boolean, typeFakeStyle: ITypeFakeStyle, addStyle?: string): string {
-  if (typeFakeStyle)
+  if (apply)
     return `style="${FAKE_STYLE[typeFakeStyle]} ${addStyle || ''}"`;
+  else if (addStyle)
+    return `style="${addStyle}"`;
   else
     return '';
 }

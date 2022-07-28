@@ -44,7 +44,7 @@ console.log(tableHtml);
 
 | **Options**        | Type | Description                      |
 |--------------------|------|----------------------------------|
-| **minify**         | Boolean | Compress HTML, remove spaces and bleaks |
+| **minify**         | Boolean | Compress HTML, remove spaces and breaks |
 | **fake_style**     | Boolean | Insert styles |
 | **columns_size**   | Numeric Array | Percent array [25, 25, 0, 50] |
 | **header**         | Array | Header property, label, width |
