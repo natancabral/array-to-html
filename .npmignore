@@ -9,7 +9,5 @@ test
 .gitignore
 
 package-lock.json
-pdfkit-guide.pdf
-pdfkit-table-ts.zip
 tsconsfig.json
 yarn.lock

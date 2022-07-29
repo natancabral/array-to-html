@@ -6,6 +6,4 @@ node_modules
 test
 
 package-lock.json
-pdfkit-guide.pdf
-pdfkit-table-ts.zip
 yarn.lock

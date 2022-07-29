@@ -22,39 +22,39 @@ function arrayToTable (array: any[], options: IOptions ) {
 
   let { minify, fake_style, columns_size, header } = options || {};
 
-  // variables
-  let lenTable = array.length;
-  let headerKeys: string[] = [];
-  let table: string = '';
-  let headerHtml: string = '';
-  let body: string = '';
-  let bodyPiece: string = '';
-  let itemOfArray: any;
-  let widthTd: string = '';
-  let hasColumSize:boolean = true;
-  let renderer: Function;
+  // set variables
+  let lenTable              = array.length;
+  let headerKeys: string[]  = [];
+  let table: string         = '';
+  let headerHtml: string    = '';
+  let body: string          = '';
+  let bodyPiece: string     = '';
+  let itemOfArray: any      = null;
+  let widthTd: string       = '';
+  let hasColumSize:boolean  = true;
+  let renderer: Function    = (el:any) => el;
 
-  // traitament
+  // soft treatment
   minify        || (minify = false);
   fake_style    || (fake_style = false);
   columns_size  || (columns_size = []);
   header        || (header = []);
-
-  // array
+  // arrays
   Array.isArray(columns_size) || (columns_size = []);
   Array.isArray(header) || (header = []);
 
   // header
   for(const keys in array[0]) {
-
     // renderer
     const headerFind = header.find((el) => el.property === keys);
     const label = headerFind?.label || keys;
-
+    // push name
     headerKeys.push(keys);
+    // push cell
     headerHtml += `<td ${createFakeStyle(fake_style, 'thead_td')}>${label}</td> `;
   }
   
+  // draw header
   headerHtml = `
     <thead>
       <tr>
@@ -68,19 +68,13 @@ function arrayToTable (array: any[], options: IOptions ) {
     hasColumSize = false;
   }
 
-  // check length header = keys
-  // if (header.length !== headerKeys.length) {
-  //   header = [];
-  // }
-
   // for array
   for (let i = 0; i < lenTable; i++) {
-
     // get item by array
     itemOfArray = array[i];
     bodyPiece = '';
     widthTd = '';
-  
+
     for (let e = 0; e < headerKeys.length; e++) {
 
       // renderer
@@ -89,15 +83,18 @@ function arrayToTable (array: any[], options: IOptions ) {
       
       // columns size 2
       if (hasColumSize) {
-        widthTd = columns_size[e] < 1 ? '' : ` width: ${columns_size[e]}%`;
+        widthTd = columns_size[e] < 1 ? '' : `width: ${columns_size[e]}%`;
       }
       // columns size 1
       if (headerFind?.width) {
-        widthTd = headerFind?.width < 1 ? '' : ` width: ${headerFind?.width}%`;
+        widthTd = headerFind?.width < 1 ? '' : `width: ${headerFind?.width}%`;
+        hasColumSize = true;
       }
-
-      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td', widthTd)}> ${ renderer(itemOfArray[headerKeys[e]]) } </td> `;
+      // cells
+      bodyPiece += `<td ${createFakeStyle(fake_style, 'tbody_td', widthTd)}> ${ renderer(itemOfArray[headerKeys[e] || '']) } </td> `;
     }
+
+    // draw line
     body += `
       <tr>
         ${bodyPiece}
@@ -105,20 +102,25 @@ function arrayToTable (array: any[], options: IOptions ) {
     `;
   }
 
+  // draw body
   body = `
     <tbody>
       ${body}
     </tbody>`;
 
+  // done table
   table = `
-  <table ${createFakeStyle(fake_style, 'table')}> 
+  <table ${createFakeStyle(fake_style, 'table', hasColumSize ? 'width: 100%' : '')}> 
     ${headerHtml} 
     ${body} 
   </table>`;
 
+  // soft minify 
   if (minify) {
     table = table.replace(/\s\s/g, '');
-    table = table.replace(/\n/g, '');  
+    // table = table.replace(/\n/g, '');
+    table = table.replace(/[\n\t]/g, '');
+    table = table.replace(/ >/g, '>');
   }
   
   return table;
@@ -128,8 +130,6 @@ export {
   arrayToTable
 } 
 
-// var country = ["Norway", "Sweden", "Denmark"];
-// var capital = ["Oslo", "Stockholm" , "Copenhagen"]
 // var table= document.createElement('table'),
 // thead = document.createElement('thead'),
 // tbody = document.createElement('tbody'),
